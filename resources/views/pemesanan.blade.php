@@ -55,10 +55,10 @@
         value="{{ isset($bus->WAKTU) ? \Carbon\Carbon::parse($bus->WAKTU)->format('H:i') : '' }}" readonly>
 </div>
                 <!-- Jumlah Tiket -->
-                <div>
+                <!-- <div>
                     <label class="block text-gray-700 font-semibold">Jumlah Tiket</label>
                     <input type="number" name="jumlah" min="1" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-green-300" placeholder="Masukkan jumlah tiket">
-                </div>
+                </div> -->
 
                 <!-- Tombol Submit -->
                 <div class="text-center mt-4">

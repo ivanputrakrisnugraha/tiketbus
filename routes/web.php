@@ -62,9 +62,18 @@ Route::get('/halaman-berikutnya', function () {
 
 
 // ✅ untuk menampilkan form data pelanggan  (pelanggan)
-Route::get('/datapelanggan', function () {
-    return view('datapelanggan'); // Menampilkan file datapelanggan.blade.php
+// Route::get('/datapelanggan', function () {
+//     return view('datapelanggan'); // Menampilkan file datapelanggan.blade.php
+// })->name('datapelanggan');
+
+use Illuminate\Http\Request;
+
+Route::get('/datapelanggan', function (Request $request) {
+    $tanggalBerangkat = $request->input('tanggal_berangkat');
+    $nomorKursi = $request->input('nomor_kursi');
+    return view('datapelanggan', compact('tanggalBerangkat', 'nomorKursi'));
 })->name('datapelanggan');
+
 
 
 // ✅ metode pembayaran (pelanggan)

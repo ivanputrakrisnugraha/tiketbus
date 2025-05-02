@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kursi;
+
 use Illuminate\Http\Request;
 
 class PemesananController extends Controller
@@ -35,10 +37,21 @@ class PemesananController extends Controller
     // ✅ Menampilkan halaman pilih kursi
     public function pilihKursi(Request $request)
     {
+
+
         $tipeBus = $request->input('tipe_bus');        // Ambil input 'tipe_bus'
-        $jumlahTiket = $request->input('jumlah');
-        
-        return view('pilihkursi', compact('tipeBus', 'jumlahTiket'));
+        $namaBus = $request->input('nm_bus');
+        $tanggalBerangkat = $request->input('tanggal_berangkat');
+
+        // dd($request->all());
+        // dd($tanggalBerangkat);
+        // Ambil kursi berdasarkan tipe bus dari database
+        $kursi = Kursi::where('nama_bus', $namaBus)
+                    ->where('tipe_bus', $tipeBus)
+                    ->get();
+
+        return view('pilihkursi', compact('tipeBus','namaBus', 'kursi', 'tanggalBerangkat'));
+        session(['pemesanan' => $request->all()]);
     }
 
     // ✅ Menyimpan kursi yang dipilih

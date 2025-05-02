@@ -3,6 +3,12 @@
 @section('title', 'Cek Data')
 
 @section('content')
+<?php
+    // dd(session('bus'));
+    // dd($tanggalBerangkat);
+?>
+
+
 <div class="min-h-screen bg-gray-100 p-6">
     <div class="max-w-5xl mx-auto bg-white rounded-lg shadow-lg">
         <!-- Header Halaman -->
@@ -27,7 +33,7 @@
             </div>
             <div class="flex justify-between">
                 <label class="font-bold">Tanggal Berangkat:</label>
-                <input type="text" class="border w-2/3 p-2 rounded bg-gray-200" readonly>
+                <input value= "{{ $tanggalBerangkat }}" type="text" class="border w-2/3 p-2 rounded bg-gray-200" readonly>
             </div>
 
             <div class="flex justify-between">
@@ -44,7 +50,7 @@
             </div>
             <div class="flex justify-between">
                 <label class="font-bold">Nomor Tempat Duduk:</label>
-                <input type="text" class="border w-2/3 p-2 rounded bg-gray-200" readonly>
+                <input value='{{$nomorKursi}}' type="text" class="border w-2/3 p-2 rounded bg-gray-200" readonly>
             </div>
         </div>
 
@@ -56,4 +62,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nomorInput = document.querySelector('input[value="{{ $nomorKursi }}"]');
+        const jumlahInput = document.querySelector('input[readonly]:not([value])'); // cari input readonly yang belum ada value (Jumlah Tiket)
+
+        if (nomorInput && jumlahInput) {
+            const nomorValue = nomorInput.value.trim();
+            const kursiArray = nomorValue ? nomorValue.split(',').map(k => k.trim()).filter(k => k !== '') : [];
+            const jumlahKursi = kursiArray.length;
+
+            jumlahInput.value = jumlahKursi;
+        }
+    });
+</script>
+
 @endsection
